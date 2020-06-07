@@ -33,6 +33,21 @@
         <p><a href="home.php?logout='1'" style="color: red;">Sair</a></p>
     <?php endif?>
     </div>
+
+    <div class="upload">
+    <form action="home.php" method="post" enctype="multipart/form-data">
+
+        <label>Selecione uma imagem para fazer upload</label>
+        <input type="file" name="file">
+        <input type="submit" name="submit" value="Upload">
+
+    </form>
+    </div>
+
+    
+
+
+
 </body>
 
 

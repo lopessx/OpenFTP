@@ -104,5 +104,24 @@ if(isset($_GET['logout'])){
     header('location: index.php');
 }
 
+//Upload de arquivos quando o botão for pressionado
+if(isset($_POST['submit'])){
+    //nome do arquivo
+    $file=$_FILES['file']['name'];
+    //Mover o arquivo que foi feito o upload para uma pasta
+    move_uploaded_file($_FILES['file']['tmp_name'],"files/$file");
+    //Nome do diretório
+    $name_dir=dirname(__DIR__);
+    $name_dir=$name_dir.'files'.$file;
+    $id=$_SESSION['id'];
+    //Inserção do nome e do caminho no banco
+    $sql="INSERT INTO `files` (name,path,id_user) VALUES ('$file','$name_dir','$id')";
+    mysqli_select_db($db,'ftp');
+    mysqli_query($db,$sql);
+    echo "<script>alert('O arquivo foi salvo com sucesso')</script>";
+    
+
+}
+
 
 ?>

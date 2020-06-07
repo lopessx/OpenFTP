@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Jun-2020 às 16:44
+-- Tempo de geração: 07-Jun-2020 às 22:53
 -- Versão do servidor: 10.4.11-MariaDB
 -- versão do PHP: 7.4.1
 
@@ -21,6 +21,26 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `ftp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `files`
+--
+
+CREATE TABLE `files` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `path` varchar(255) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `path`, `id_user`) VALUES
+(1, 'Zoom.exe', 'D:xampphtdocsopenftpfilesZoom.exe', 1);
 
 -- --------------------------------------------------------
 
@@ -53,6 +73,13 @@ INSERT INTO `users` (`id`, `username`, `passwords`, `email`) VALUES
 --
 
 --
+-- Índices para tabela `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_USERS` (`id_user`);
+
+--
 -- Índices para tabela `users`
 --
 ALTER TABLE `users`
@@ -63,10 +90,26 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT de tabela `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `files`
+--
+ALTER TABLE `files`
+  ADD CONSTRAINT `FK_USERS` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
