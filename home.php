@@ -50,7 +50,7 @@ $con=mysqli_query($db,$sql);
     <form action="home.php" method="post" enctype="multipart/form-data">
     <!-- Mostra os erros de validação aqui -->
     <?php include('src/errors.php'); ?>
-        <label>Selecione uma imagem para fazer upload</label>
+        <label>Selecione um arquivo para fazer upload</label>
         <input type="file" name="file" class="submit">
         <br>
         <input type="submit" name="submit" value="Upload" class="submit">
