@@ -111,16 +111,24 @@ if(isset($_POST['submit'])){
     //Mover o arquivo que foi feito o upload para uma pasta
     move_uploaded_file($_FILES['file']['tmp_name'],"files/$file");
     //Nome do diretório
-    $name_dir=dirname(__DIR__);
-    $name_dir=$name_dir.'files'.$file;
+    $path = $_SERVER['DOCUMENT_ROOT']."/ftp/"."files/".$file;
     $id=$_SESSION['id'];
     //Inserção do nome e do caminho no banco
-    $sql="INSERT INTO `files` (name,path,id_user) VALUES ('$file','$name_dir','$id')";
+    $sql="INSERT INTO `files` (name,path,id_user) VALUES ('$file','$path','$id')";
     mysqli_select_db($db,'ftp');
     mysqli_query($db,$sql);
     echo "<script>alert('O arquivo foi salvo com sucesso')</script>";
     
 
+}
+
+//Excluir arquivos
+if(isset($_GET['excluir'])){
+    $cod_arquivo = $_GET['excluir'];
+    $sql= "DELETE FROM `files` WHERE `files`.`id` = '$cod_arquivo'";
+    mysqli_select_db($db,'ftp');
+    mysqli_query($db,$sql);
+    
 }
 
 
