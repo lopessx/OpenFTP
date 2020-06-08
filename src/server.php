@@ -13,6 +13,12 @@ if(isset($_POST['register'])){
     $email = mysqli_real_escape_string($db,$_POST['email']);
     $password_1 = mysqli_real_escape_string($db,$_POST['password_1']);
     $password_2 = mysqli_real_escape_string($db,$_POST['password_2']);
+    //É necessário selecionar o banco antes de executar um comando
+    mysqli_select_db($db,'ftp');
+    //Verificação para não fazer cadastro duplicado
+    $sql="SELECT * FROM `users` WHERE email='$email'";
+    $con= mysqli_query($db,$sql);
+    $dados=$con->fetch_array();
 
 
 //Garante que o formulário esteja preenchido corretamente
@@ -30,17 +36,22 @@ if(empty($password_2)){
     array_push($errors,"Confirmação de senha não preenchida");
 }
 
+if($dados['email'] == $email){
+    array_push($errors,"Já existe uma conta com esse email");
+}
+
 if($password_1 != $password_2){
     array_push($errors, "As duas senhas estão diferentes");
 }
 
 // Caso não tenha nenhum erro salve os dados no banco de dados
 if(count($errors) == 0){
+    
+    //É necessário selecionar o banco antes de executar um comando
+    mysqli_select_db($db,'ftp');
     $password = md5($password_1);//Criptografar a senha antes de guardar no banco
     //Comando de inserção no banco
     $sql = "INSERT INTO users (username, passwords, email) VALUES ('$username','$password','$email') ";
-    //É necessário selecionar o banco antes de executar um comando
-    mysqli_select_db($db,'ftp');
     //Execução do comando em si utilizando como parâmetro a conexão
     mysqli_query($db,$sql);
     $sql = " SELECT id FROM `users` WHERE email='$email' ";
