@@ -108,16 +108,21 @@ if(isset($_GET['logout'])){
 if(isset($_POST['submit'])){
     //nome do arquivo
     $file=$_FILES['file']['name'];
+    //Garante que tenha algum arquivo
+    if(empty($file)){
+        array_push($errors,"Nenhum arquivo para fazer upload");
+    }
+    if(count($errors) ==0){
     //Mover o arquivo que foi feito o upload para uma pasta
     move_uploaded_file($_FILES['file']['tmp_name'],"files/$file");
     //Nome do diretório
-    $path = $_SERVER['DOCUMENT_ROOT']."/ftp/"."files/".$file;
+    $path = $_SERVER['DOCUMENT_ROOT']."/openftp/"."files/".$file;
     $id=$_SESSION['id'];
     //Inserção do nome e do caminho no banco
     $sql="INSERT INTO `files` (name,path,id_user) VALUES ('$file','$path','$id')";
     mysqli_select_db($db,'ftp');
     mysqli_query($db,$sql);
-    echo "<script>alert('O arquivo foi salvo com sucesso')</script>";
+    }
     
 
 }
@@ -131,5 +136,38 @@ if(isset($_GET['excluir'])){
     
 }
 
+//Editar arquivos
+if(isset($_POST['confirmar'])){
+    $cod_arquivo = $_POST['codigo'];
+    $nome_arquivo = $_POST['file'];
+    $nome_antigo = $_POST['file_past'];
+    $path = $_SERVER['DOCUMENT_ROOT']."/openftp/"."files/".$nome_antigo;
+    $path_novo = $_SERVER['DOCUMENT_ROOT']."/openftp/"."files/".$nome_arquivo;
+    //Muda o nome do arquivo
+    
+
+
+    //Garante que o formulário esteja preenchido
+    if(empty($cod_arquivo)){
+        array_push($errors,"Arquivo invalido");
+    }
+    if(empty($nome_arquivo)){
+        array_push($errors,"Nome não preenchido");
+    }
+    if(empty($nome_antigo)){
+        array_push($errors,"Arquivo invalido");
+    }
+    //Caso não haja erros salva o novo nome no banco
+    if(count($errors)==0){
+    rename($path,$path_novo);
+    $sql= "UPDATE `files` SET name='$nome_arquivo' WHERE `files`.`id` = '$cod_arquivo'";
+    mysqli_select_db($db,'ftp');
+    mysqli_query($db,$sql);
+    
+    $sql= "UPDATE `files` SET path='$path_novo' WHERE `files`.`id` = '$cod_arquivo'";
+    mysqli_query($db,$sql);
+    header('location: home.php'); //redireciona para a homepage
+    }
+}
 
 ?>

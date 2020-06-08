@@ -5,10 +5,12 @@
 <title>OPEN FTP</title>
 <!-- Esse link está apontando para o style.css para fazer a estilização das páginas -->
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="sortcut icon" href="thumbnails/openftplogo.ico" type="image/x-icon" />
 </head>
 
 <body>
 <div class="header">
+    <img src="thumbnails/openftplogo.png" alt="Logomarca OPENFTP" width=50 height=50 class="img">
     <h2>Registro</h2>
 </div>
 <!-- Formulário de cadastro -->

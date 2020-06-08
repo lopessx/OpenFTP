@@ -4,7 +4,7 @@
 }
 body{
     font-size: 120%;
-    background: #F8F8FF;
+    background: #ADD8E6;
 }
 .header{
     width: 30%;
@@ -22,7 +22,7 @@ form, .content{
     margin: 0px auto;
     padding: 20px;
     border: 1px solid #b0c4de;
-    background: white;
+    background: #E0FFFF;
     border-radius: 0px 0px 10px 10px;
 }
 .input-group{
@@ -44,6 +44,7 @@ form, .content{
 .btn {
     padding: 10px;
     font-size: 15px;
+    font-weight: bolder;
     color: white;
     background: #5F9EA0;
     border: none;
@@ -74,7 +75,7 @@ form, .content{
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
-    background: white;
+    background: #E0FFFF;
     text-align: center;
     
 }
@@ -89,4 +90,24 @@ form, .content{
     border-bottom: none;
     border-radius: 10px 10px 0px 0px;
     padding: 20px;
+}
+
+.submit{
+    margin: 5px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bolder;
+    color: white;
+    background: #5F9EA0;
+    border: none;
+    border-radius: 5px;
+    
+}
+.file_id{
+    opacity: 0;
+    float: none;
+}
+.img{
+    float: left;
+    
 }
