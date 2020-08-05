@@ -1,7 +1,9 @@
-# openftp 
+# OPENFTP 
 FTP client-server totally in PHP    
 
 ## Install    
+
+(THIS APLICATION NEEDS APACHE2)
 
 1- download or run git clone and add the folder in the htdocs or other virtual host  
 2- Create the database using the code:  
